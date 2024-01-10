@@ -23,21 +23,40 @@ target = 'PAN_DUAN_JIE_GUO'
 categorical_features = ['SAN_YUE_YI_YUAN','YI_NIAN_YI_YUAN','DANG_DI_JIAO_SHI','DANG_DI_XUE_SHENG','DANG_DI_ZAI_ZHI','GONG_JI_JIN','BU_DONG_CHAN_SHU_LIANG','GONG_ZU_FANG','JIN_QI_JIAO_YI','SHE_HUI_JIU_ZHU','BEN_DI_FA_REN','SI_WANG_ZHENG_MING','SAN_TIAN_SAN_JIAN','HU_JI_REN_KOU_ZC','JIAO_NA_SHE_BAO','ZAI_XIAO_XUE_SHENG','HU_JI_REN_KOU_ZX','LIU_DONG_REN_KOU_ZX','JU_ZHU_ZHENG_ZX']  # 分类特征
 numerical_features = ['SANSHI_TIAN_TING_CHE','BAN_NIAN_TING_CHE','SANSHI_TIAN_GONG_JIAO','BAN_NIAN_GONG_JIAO']  # 数值特征
 
+print("categories features length: ", len(categorical_features))
+print("numerical features length: ", len(numerical_features))
+
 X, y = dp.preprocess_data(data, target, categorical_features, numerical_features)
 X_train, X_test, y_train, y_test = dp.split_data(X, y)
 
 # 训练模型
 model = mt.train_model(X_train, y_train)
 
-# 打印模型权重和截距
-print("Model coefficients: ", model.coef_, len(model.coef_[0]))
-print("Model intercept: ", model.intercept_)
-
 # 评估模型
 me.evaluate_model(model, X_test, y_test)
 
 # 加载预处理器
 preprocessor = dp.load_preprocessor('preprocessor.joblib')
+
+# 假设 preprocessor 是一个 ColumnTransformer
+feature_names = preprocessor.get_feature_names_out()
+
+# 假设 model 是你的逻辑回归模型
+coefficients = model.coef_[0]  # 获取模型系数
+
+# 确保特征名称和系数长度相同
+assert len(coefficients) == len(feature_names)
+
+# 创建一个特征名称和系数的字典
+feature_coefficient_dict = dict(zip(feature_names, coefficients))
+
+# 打印每个特征及其对应的系数
+for feature, coef in feature_coefficient_dict.items():
+    print(f"Feature: {feature}, Coefficient: {coef}")
+
+# 打印模型权重和截距
+print("Model coefficients: ", model.coef_, len(model.coef_[0]))
+print("Model intercept: ", model.intercept_)
 
 # 对新数据进行预测
 new_data = dp.load_data(new_data_file)
