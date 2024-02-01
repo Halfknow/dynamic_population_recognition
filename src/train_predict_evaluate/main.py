@@ -19,8 +19,9 @@ new_data_file = DIR_PATH + 'data/data_to_predict_final.csv'
 # 数据预处理
 data = dp.load_data(data_file)
 target = 'PAN_DUAN_JIE_GUO'
+target_predict = 'PAN_DUAN_JIE_GUO_ML'
 
-categorical_features = ['SAN_YUE_YI_YUAN','YI_NIAN_YI_YUAN','DANG_DI_JIAO_SHI','DANG_DI_XUE_SHENG','DANG_DI_ZAI_ZHI','GONG_JI_JIN','BU_DONG_CHAN_SHU_LIANG','GONG_ZU_FANG','JIN_QI_JIAO_YI','SHE_HUI_JIU_ZHU','BEN_DI_FA_REN','SI_WANG_ZHENG_MING','SAN_TIAN_SAN_JIAN','HU_JI_REN_KOU_ZC','JIAO_NA_SHE_BAO','ZAI_XIAO_XUE_SHENG','HU_JI_REN_KOU_ZX','LIU_DONG_REN_KOU_ZX','JU_ZHU_ZHENG_ZX']  # 分类特征
+categorical_features = ['SAN_YUE_YI_YUAN','YI_NIAN_YI_YUAN','DANG_DI_JIAO_SHI','DANG_DI_XUE_SHENG','DANG_DI_ZAI_ZHI','GONG_JI_JIN','BU_DONG_CHAN_SHU_LIANG','GONG_ZU_FANG','JIN_QI_JIAO_YI','SHE_HUI_JIU_ZHU','BEN_DI_FA_REN','SI_WANG_ZHENG_MING','HU_JI_REN_KOU_ZC','JIAO_NA_SHE_BAO','ZAI_XIAO_XUE_SHENG','HU_JI_REN_KOU_ZX','LIU_DONG_REN_KOU_ZX','JU_ZHU_ZHENG_ZX','SHE_QU_PAI_CHA_ZZ']  # 分类特征
 numerical_features = ['SANSHI_TIAN_TING_CHE','BAN_NIAN_TING_CHE','SANSHI_TIAN_GONG_JIAO','BAN_NIAN_GONG_JIAO']  # 数值特征
 
 print("categories features length: ", len(categorical_features))
@@ -60,7 +61,7 @@ print("Model intercept: ", model.intercept_)
 
 # 对新数据进行预测
 new_data = dp.load_data(new_data_file)
-new_data_processed, _ = dp.preprocess_data(new_data, target, categorical_features, numerical_features, preprocessor)
+new_data_processed, _ = dp.preprocess_data(new_data, target_predict, categorical_features, numerical_features, preprocessor)
 predictions = model.predict(new_data_processed)
 
 print("predictions: ", predictions)

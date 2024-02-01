@@ -1,8 +1,9 @@
-# 1st step
+# 读取 CSV 源文件文件，转换成训练数据和预测数据
+
 import pandas as pd
 
 # 替换为您的 CSV 文件路径
-file_path = './data/DWD_NBBL_RKTZ_DTRKTZ_DF_202311211623.csv'
+file_path = './data/DWD_NBBL_RKTZ_DTRKTZ_DF_202401291630.csv'
 df = pd.read_csv(file_path, sep=',')
 print("df", df)
 # 打印每个字段的数据类型

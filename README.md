@@ -26,11 +26,22 @@ shap>=0.44.0
 
 ### Training
 
-
-
 ### Evaluation
 
 ### Prediction
 
 ### Visualization
 
+### 文件执行顺序
+```
+data_preprocessing.py - 数据预处理
+data_reader.py - 数据读取
+data_to_predict_final.py - 最终预测数据处理
+data_to_predict_statistics.py - 预测数据统计
+main.py - 主程序
+model_evaluation.py - 模型评估
+model_training.py - 模型训练
+prediction.py - 预测
+data_decided_statistics.py - 已决策数据统计
+data_predicted_statistics.py - 已预测数据统计
+```
