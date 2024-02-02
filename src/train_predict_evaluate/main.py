@@ -68,7 +68,7 @@ print("predictions: ", predictions)
 print("predictions_type: ", type(predictions))
 
 # 将预测结果转换为DataFrame
-new_data['Prediction_Column'] = predictions
+new_data[target_predict] = predictions
 
 # 保存预测好的数据
 new_data.to_csv('./data/data_predicted.csv', index=False)
